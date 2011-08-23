@@ -5,11 +5,10 @@ var System = require('./System');
 System.extend(require('./System/Web')); 
 System.extend(require('./System/Web/Routing'));
 
-// var routeCollection = new System.Web.Routing.RouteCollection();
-// routeCollection.Add('item', new System.Web.Routing.Route());
-// routeCollection.InsertItem(0, 'Inserted Item');
-// routeCollection.ClearItems();
-// return;
+// Register routes to route table
+var RouteTable = System.Web.Routing.RouteTable;
+RouteTable.Routes.Add('item', new System.Web.Routing.Route());
+RouteTable.Routes.InsertItem(0, 'Inserted Item');
 
 // APP	
 http.createServer(function (req, res) {

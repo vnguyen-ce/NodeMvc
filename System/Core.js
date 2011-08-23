@@ -10,6 +10,9 @@ function _merge(from, to){
 		else if(typeof(from[name]) == 'function' && typeof(to[name]) == 'function'){
 			to[name] = from[name];
 		}
+		else if(typeof(from[name]) != 'object'){
+			to[name] = from[name];
+		}
 		else {				
 			dest[name] = _merge(from[name], to[name]);
 		}
