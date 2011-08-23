@@ -2,7 +2,7 @@ require('./Core.js')
 
 var System = {};
 
-System.extend(require('./Web'));
+// Include all classes in this folder
 //System.extend(require('./Mvc'));
 
 module.exports = System;

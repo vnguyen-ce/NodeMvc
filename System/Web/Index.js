@@ -1,7 +1,7 @@
 require('../Core.js')
 var System = {};
 
-System.extend(require('./Mvc/Index.js'));
+// Include all classes in this folder
 System.extend(require('./IHttpHandler.js'));
 System.extend(require('./SimpleHttpHandler.js'));	
 System.extend(require('./HttpContext.js'));

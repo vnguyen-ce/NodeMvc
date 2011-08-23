@@ -1,8 +1,9 @@
 require('../../Core.js')
-var System = {};
+var Modules = {};
+// Include all classes in this folder
 
-//System.extend(require('./IHttpHandler.js'));
-//System.extend(require('./SimpleHttpHandler.js'));	
-//System.extend(require('./HttpContext.js'));
+//Modules.extend(require('./IHttpHandler.js'));
+//Modules.extend(require('./SimpleHttpHandler.js'));	
+//Modules.extend(require('./HttpContext.js'));
 
-module.exports = System;
+module.exports = Modules;
