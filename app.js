@@ -1,7 +1,7 @@
 var http = require('http');
-
+var util = require('util');
 // Include all namespaces in System folder
-var System = require('./System'); 
+var System =  require('./System'); 
 System.extend(require('./System/Web')); 
 System.extend(require('./System/Web/Routing'));
 
@@ -14,6 +14,7 @@ RouteTable.Routes.InsertItem(0, 'Inserted Item');
 http.createServer(function (req, res) {
 	var handler = new System.Web.SimpleHttpHandler();		
 	handler.ProcessRequest(new System.Web.HttpContext(req, res));
+	console.log(util.inspect(process.memoryUsage()));
 }).listen(1337, "127.0.0.1");
 
 console.log('Server running at http://127.0.0.1:1337/');

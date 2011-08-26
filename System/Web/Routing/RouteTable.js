@@ -1,7 +1,5 @@
-var Class = require('../../Class.js');
-
 // Import 1 type of same namespace and add more class to that namespace
-var System = require('./RouteCollection.js') || {};		
+var System = require('./RouteCollection.js');		
 
 // Summary:
 //     Stores the URL routes for an application.
