@@ -2,6 +2,7 @@ var Core = require('../../Core.js');
 
 // Import 1 type of same namespace and add more class to that namespace
 var System = require('./RouteBase.js');	
+	System.extend(require('./StopRoutingHandler.js'));
 System.Web.Routing.RouteCollection = Core.inheritFrom(Array);
 System.Web.Routing.RouteCollection.prototype._namedMap = new Array();	
 
@@ -31,13 +32,14 @@ System.Web.Routing.RouteCollection.prototype.Add = function(name /*route name*/,
 		throw 'Provided item is not an instance of System.Web.Routing.RouteBase';
 	}
 	
+	this.push(routeBase);
 	this._namedMap[name] = routeBase;		
 };
 
 //
 // Summary:
 //     Removes all the elements from the System.Web.Routing.RouteCollection object.
-System.Web.Routing.RouteCollection.prototype.ClearItems= function() {		
+System.Web.Routing.RouteCollection.prototype.ClearItems = function() {		
 	this.splice(0, this.length);		
 	this._namedMap = [];		
 };	
@@ -49,8 +51,12 @@ System.Web.Routing.RouteCollection.prototype.ClearItems= function() {
 // Parameters:
 //   url:
 //     The URL pattern to be ignored.
-System.Web.Routing.RouteCollection.prototype.Ignore= function(urlPattern){
-	throw "Not implemented exception";
+System.Web.Routing.RouteCollection.prototype.Ignore = function(urlPattern){
+	var ignoreRoute = new System.Web.Routing.Route(urlPattern);
+	
+	// TODO: Should implement a FileSystemHandler instead of using StopRoutingHandler
+	ignoreRoute.RouteHandler = new System.Web.Routing.StopRoutingHandler();
+	this.push(ignoreRoute);
 };
 
 //
@@ -72,6 +78,9 @@ System.Web.Routing.RouteCollection.prototype.Ignore= function(urlPattern){
 //   System.ArgumentException:
 //     item is already in the collection.
 System.Web.Routing.RouteCollection.prototype.InsertItem = function(index, routeBase){
+	if (!(routeBase instanceof System.Web.Routing.RouteBase)){
+		throw 'Provided item is not an instance of System.Web.Routing.RouteBase';
+	}
 	this.splice(index, 0, routeBase);
 };
 
@@ -105,6 +114,9 @@ System.Web.Routing.RouteCollection.prototype.RemoveItem = function(index){
 //   System.ArgumentException:
 //     item is already in the collection.
 System.Web.Routing.RouteCollection.prototype.SetItem = function(index, routeBase){			
+	if (!(routeBase instanceof System.Web.Routing.RouteBase)){
+		throw 'Provided item is not an instance of System.Web.Routing.RouteBase';
+	}
 	this[index] = routeBase;
 };
 
