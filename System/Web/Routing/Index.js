@@ -1,6 +1,7 @@
 require('../../Core.js');
 var Modules = {};
 
+Modules.extend(require('./RouteData.js'));
 Modules.extend(require('./RouteBase.js'));
 Modules.extend(require('./Route.js'));
 Modules.extend(require('./RouteCollection.js'));

@@ -8,7 +8,7 @@ function _copyObjects(source, des){
 	var props = Object.getOwnPropertyNames(source);
 	//console.log(props);
 	props.forEach(function(name) {
-		if(typeof(source[name]) != 'function' && typeof (source[name]) != undefined ){
+		if(typeof(source[name]) != 'function' && typeof (source[name]) != 'undefined' ){
 			des[name] = source[name];
 		}		
 	});
@@ -38,7 +38,7 @@ System.Web.Routing.RouteValueDictionary.prototype.Clear = function() {
 };
  
 System.Web.Routing.RouteValueDictionary.prototype.ContainsKey = function(key) {
-	return (typeof this[key] != undefined);
+	return (typeof this[key] != 'undefined');
 };
 
 System.Web.Routing.RouteValueDictionary.prototype.ContainsValue = function(value) {
