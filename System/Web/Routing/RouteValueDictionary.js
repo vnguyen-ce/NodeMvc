@@ -2,7 +2,7 @@ require('../../Core.js');
 var System = require('../../ArgumentNullException.js');;
 	System.Web = System.Web || {};
 	System.Web.Routing = System.Web.Routing || {};
-	
+
 	
 function _copyObjects(source, des){
 	var props = Object.getOwnPropertyNames(source);
