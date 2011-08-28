@@ -23,18 +23,39 @@ System.Web.Routing.RouteCollection.prototype._namedMap = new Array();
 //
 //   System.ArgumentException:
 //     name is already used in the collection.
-System.Web.Routing.RouteCollection.prototype.Add = function(name /*route name*/, routeBase) {			
+System.Web.Routing.RouteCollection.prototype.AddByName = function(name /*route name*/, routeBase) {			
 	if (routeBase == null || name == null || name == ''){
 		throw "Argument null exception";
 	}	
-	
-	if (!(routeBase instanceof System.Web.Routing.RouteBase)){
-		throw 'Provided item is not an instance of System.Web.Routing.RouteBase';
-	}
-	
-	this.push(routeBase);
-	this._namedMap[name] = routeBase;		
+	var route = _getRoute(routeBase);	
+	this.push(route);
+	this._namedMap[name] = route;		
 };
+
+System.Web.Routing.RouteCollection.prototype.Add = function(routeBase) {			
+	if (routeBase == null){
+		throw "Argument null exception";
+	}	
+	var route = _getRoute(routeBase);	
+	this.push(route);
+};
+
+var _getRoute = function(routeBase) {
+	var route = routeBase;
+	if (!(routeBase instanceof System.Web.Routing.RouteBase)){
+		if (typeof routeBase.Url === 'string' && 
+			typeof routeBase.Defaults === 'object' &&
+			routeBase.Url != '') 
+		{
+			route = new System.Web.Routing.Route(routeBase.Url); 
+			route.Defaults = routeBase.Defaults;
+		}
+		else {
+			throw 'Provided item is not an instance of System.Web.Routing.RouteBase';
+		}
+	}
+	return route;
+}
 
 //
 // Summary:

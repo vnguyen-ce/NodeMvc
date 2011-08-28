@@ -21,7 +21,14 @@ var MvcApplication = {
 	
 	RegisterRoutes: function(routeCollection){
 		routeCollection.Ignore('/favicon.ico');
-		routeCollection.Add('Default', new System.Web.Routing.Route('/controller/action/id'));
+		routeCollection.AddByName('Default Route', 
+		{
+			Url: '/{controller}/{action}/{id}',
+			Defaults: {
+				Controller: 'Home', 
+				Action: 'Index'
+			}
+		});
 		console.log(routeCollection);
 	}	
 };
