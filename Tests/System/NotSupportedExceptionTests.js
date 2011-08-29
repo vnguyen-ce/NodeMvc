@@ -10,16 +10,9 @@ module.exports = testCase({
         callback();
     },
 	
-    can_initialise_an_exception: function (test) {
-		var exception = new System.Exception();
-        test.ok(exception != null);
-		test.ok(exception instanceof System.Exception);
-        test.done();
-    },
-	
-	can_initialise_an_Exception_with_message: function (test) {
-		var message = 'Some error message';
-		var exception = new System.Exception(message);        
+	can_initialise_a_NotSupportedException_with_message: function (test) {
+		var message = 'Not supported';
+		var exception = new System.InvalidOperationException(message);        
 		test.ok(exception instanceof System.Exception);
 		test.equal(exception.Message, message);
 		test.ok(exception.StackTrace != '');
