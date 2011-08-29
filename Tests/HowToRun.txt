@@ -1,0 +1,2 @@
+// Require module NodeUnit in /node_modules folder
+node NodeMvc\Tests\All.js
