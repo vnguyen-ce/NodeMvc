@@ -1,7 +1,8 @@
 var Core = require('../../Core.js');
 
 // Import 1 type of same namespace and add more class to that namespace
-var System = require('./RouteBase.js');	
+var System = require('../../../System');	
+	System.extend(require('./RouteBase.js'));
 	System.extend(require('./StopRoutingHandler.js'));
 System.Web.Routing.RouteCollection = Core.inheritFrom(Array);
 System.Web.Routing.RouteCollection.prototype._namedMap = new Array();	
@@ -25,7 +26,10 @@ System.Web.Routing.RouteCollection.prototype._namedMap = new Array();
 //     name is already used in the collection.
 System.Web.Routing.RouteCollection.prototype.AddByName = function(name /*route name*/, routeBase) {			
 	if (routeBase == null || name == null || name == ''){
-		throw "Argument null exception";
+		throw new System.ArgumentNullException('name');
+	}	
+	if (routeBase == null){
+		throw new System.ArgumentNullException('routeBase');
 	}	
 	var route = _getRoute(routeBase);	
 	this.push(route);
@@ -34,7 +38,7 @@ System.Web.Routing.RouteCollection.prototype.AddByName = function(name /*route n
 
 System.Web.Routing.RouteCollection.prototype.Add = function(routeBase) {			
 	if (routeBase == null){
-		throw "Argument null exception";
+		throw new System.ArgumentNullException('routeBase');
 	}	
 	var route = _getRoute(routeBase);	
 	this.push(route);
@@ -51,7 +55,7 @@ var _getRoute = function(routeBase) {
 			route.Defaults = routeBase.Defaults;
 		}
 		else {
-			throw 'Provided item is not an instance of System.Web.Routing.RouteBase';
+			throw new System.InvalidOperationException('Provided item is not an instance of System.Web.Routing.RouteBase');
 		}
 	}
 	return route;
@@ -99,10 +103,11 @@ System.Web.Routing.RouteCollection.prototype.Ignore = function(urlPattern){
 //   System.ArgumentException:
 //     item is already in the collection.
 System.Web.Routing.RouteCollection.prototype.InsertItem = function(index, routeBase){
-	if (!(routeBase instanceof System.Web.Routing.RouteBase)){
-		throw 'Provided item is not an instance of System.Web.Routing.RouteBase';
-	}
-	this.splice(index, 0, routeBase);
+	if (routeBase == null){
+		throw new System.ArgumentNullException('routeBase');
+	}	
+	var route = _getRoute(routeBase);	
+	this.splice(index, 0, route);
 };
 
 //
@@ -135,10 +140,11 @@ System.Web.Routing.RouteCollection.prototype.RemoveItem = function(index){
 //   System.ArgumentException:
 //     item is already in the collection.
 System.Web.Routing.RouteCollection.prototype.SetItem = function(index, routeBase){			
-	if (!(routeBase instanceof System.Web.Routing.RouteBase)){
-		throw 'Provided item is not an instance of System.Web.Routing.RouteBase';
-	}
-	this[index] = routeBase;
+	if (routeBase == null){
+		throw new System.ArgumentNullException('routeBase');
+	}	
+	var route = _getRoute(routeBase);	
+	this[index] = route;
 };
 
 module.exports = System;

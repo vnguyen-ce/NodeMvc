@@ -30,3 +30,12 @@ assert.noMatch(value, pattern, message)
 assert.isPrototypeOf(proto, object, message)
 assert.isNotPrototypeOf(proto, object, message)
 ------------------------------------------------------------------------------------------------
+assert.ok(value, message)
+assert.equal(actual, expected, message) - comparison by ==
+assert.notEqual(actual, expected, message)
+assert.deepEqual(actual, expect, message) - recursive comparison
+assert.notDeepEqual(actual, expect, message)
+assert.strictEqual(actual, expected, message) - comparison by ===
+assert.notStrictEqual(actual, expected, message)
+assert.throws(block, error, message)
+assert.doesNotThrow(block, error, message)
