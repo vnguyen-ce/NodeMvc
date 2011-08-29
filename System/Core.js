@@ -31,10 +31,10 @@ Object.defineProperty(Object.prototype, "Inherit", {
     enumerable: false,
     value: function(from) {
         if (typeof (from) != 'function') {
-            throw 'Can inherit from a class function only';
+            throw new Error('Can inherit from a class function only');
         }
         if (typeof (this) != 'function') {
-            throw 'Can call method on a class function only';
+            throw  new Error('Can call method on a class function only');
         }
         this.prototype = new from();        
         this.prototype._base = from.prototype;
@@ -45,10 +45,10 @@ Object.defineProperty(Object.prototype, "Implement", {
     enumerable: false,
     value: function(anInterface) {    
         if (typeof (anInterface) != 'function') {
-            throw 'Can implement an interface only';
+            throw new Error('Can implement an interface only');
         }
         if (typeof (this) != 'function') {
-            throw 'Can call method on a function/class only';
+            throw new Error('Can call method on a function/class only');
         }        
         anInterface.prototype._isImplementing = true;
         this.prototype = new anInterface();
@@ -61,7 +61,7 @@ Object.defineProperty(Object.prototype, "Implement", {
 
 function inheritFrom(type) {
     if (typeof (type) != 'function') {
-        throw 'type must be a function';
+        throw new Error('type must be a function');
     }
      
     // constructor with more than 3 params is not a good practice
@@ -77,15 +77,15 @@ function inheritFrom(type) {
 function interface(name, contract){
     var _interface = function() {
         if (this._isImplementing !== true){
-            throw 'Cannot initialize interface "' + name + '"';
+            throw new Error('Cannot initialize interface "' + name + '"');
         }    
          
         if (name === '' || typeof name !== 'string'){
-            throw 'Must provide interface name';
+            throw new Error('Must provide interface name');
         }
          
         if (contract == null || typeof contract !== 'object') {
-            throw 'Must provide a contract as an object';
+            throw new Error('Must provide a contract as an object');
         }
          
         this._name = name;            

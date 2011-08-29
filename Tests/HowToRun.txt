@@ -1,2 +1,32 @@
-// Require module NodeUnit in /node_modules folder
+// Require module nodeunit & assert-extrasin /node_modules folder
 node NodeMvc\Tests\All.js
+------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------
+http://gitorious.org/node-assert-extras#more
+Node Assert Extras
+
+A set of high level assertions for node.js. All assertions build on the standard ones provided by the “assert” package. The assert-extras module provides both the built-in asserts and the added ones in the same module.
+var assert = require("assert-extras");
+Then knock yourself out using any of the built-in assertions in addition to the following ones:
+
+assert.isNull(value, message)
+assert.isNotNull(value, message)
+assert.isTypeOf(value, type, message)
+assert.isNotTypeOf(value, type, message)
+assert.isObject(value, message)
+assert.isFunction(value, message)
+assert.isString(value, message)
+assert.isNumber(value, message)
+assert.isBoolean(value, message)
+assert.isUndefined(value, message)
+assert.isNotUndefined(value, message)
+assert.isArray(value, message)
+assert.isNaN(value, message)
+assert.isNotNaN(value, message)
+assert.match(value, pattern, message)
+assert.noMatch(value, pattern, message)
+assert.isPrototypeOf(proto, object, message)
+assert.isNotPrototypeOf(proto, object, message)
+------------------------------------------------------------------------------------------------
