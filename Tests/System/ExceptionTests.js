@@ -21,8 +21,8 @@ module.exports = testCase({
 		var message = 'Some error message';
 		var exception = new System.Exception(message);        
 		test.ok(exception instanceof System.Exception);
-		test.equal(exception.Message, message);
-		test.ok(exception.StackTrace != '');
+		test.equal(exception.message, message);
+		test.ok(exception.stackTrace != '');
         test.done();
     }
 });

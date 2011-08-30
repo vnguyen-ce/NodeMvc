@@ -14,8 +14,8 @@ module.exports = testCase({
 		var argName = 'ArgName';
 		var exception = new System.ArgumentNullException(argName);        
 		test.ok(exception instanceof System.Exception);
-		test.equal(exception.Message, argName + ' can not be null');
-		test.ok(exception.StackTrace != '');
+		test.equal(exception.message, argName + ' can not be null');
+		test.ok(exception.stackTrace != '');
         test.done();
     }
 });

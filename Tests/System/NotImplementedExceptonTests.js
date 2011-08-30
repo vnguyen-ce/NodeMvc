@@ -14,8 +14,8 @@ module.exports = testCase({
 		var message = 'An error message';
 		var exception = new System.InvalidOperationException(message);        
 		test.ok(exception instanceof System.Exception);
-		test.equal(exception.Message, message);
-		test.ok(exception.StackTrace != '');
+		test.equal(exception.message, message);
+		test.ok(exception.stackTrace != '');
         test.done();
     }
 });
