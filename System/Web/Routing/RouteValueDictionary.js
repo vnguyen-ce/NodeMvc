@@ -5,6 +5,9 @@ var System = require('../../ArgumentNullException.js');;
 
 	
 function _copyObjects(source, des){
+	if (source == null){
+		return;
+	}
 	var props = Object.getOwnPropertyNames(source);
 	//console.log(props);
 	props.forEach(function(name) {
@@ -25,7 +28,7 @@ System.Web.Routing.RouteValueDictionary.prototype.Add = function(key, value) {
 };
 
 System.Web.Routing.RouteValueDictionary.prototype.AddValues = function(values) {
-	if (typeof values !== 'object') {
+	if (values == null || typeof values !== 'object') {
 		throw new System.ArgumentNullException('values');
 	}
 	_copyObjects(values, this);
