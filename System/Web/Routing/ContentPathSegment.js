@@ -2,6 +2,7 @@ require('../../Linq/Enumerable.js');
 var Core = require('../../Core.js');
 var System = require('./PathSegment.js');
 	System.extend(require('./PathSubsegment.js'));
+	System.extend(require('./ParameterSubsegment.js'));
 	System.extend(require('../../../System'));
 
 System.Web.Routing.ContentPathSegment = function(subsegments){	
@@ -15,13 +16,13 @@ System.Web.Routing.ContentPathSegment = function(subsegments){
 		throw new System.InvalidOperationException('provided subsegments is not a list of System.Web.Routing.PathSubsegment');
 	}
 	
-	this._subsegments = subsegments;
+	this.subsegments = subsegments;
 };
 
 System.Web.Routing.ContentPathSegment.inherit(System.Web.Routing.PathSegment);
 
 System.Web.Routing.ContentPathSegment.prototype.isCatchAll = function() {
-	return this._subsegments.any(function(x) {
+	return this.subsegments.any(function(x) {
 		return (x instanceof System.Web.Routing.ParameterSubsegment && x.isCatchAll === true);
 	});
 }

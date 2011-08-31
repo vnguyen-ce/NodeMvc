@@ -38,8 +38,19 @@ module.exports = testCase({
 		list.push(new System.Web.Routing.PathSubsegment());
 		
 		var segment = new System.Web.Routing.ContentPathSegment(list);		
-		assert.ok(segment._subsegments.length == 1);
-		assert.ok(segment._subsegments[0] instanceof System.Web.Routing.PathSubsegment);
+		assert.ok(segment.subsegments.length == 1);
+		assert.ok(segment.subsegments[0] instanceof System.Web.Routing.PathSubsegment);
         test.done();
     },
+	
+	isCatchAll_should_return_true_if_there_is_an_item_is_ParameterSubsegment_and_has_isCatchAll_true: function(test) {
+		var list = new Array();
+		list.push(new System.Web.Routing.PathSubsegment());
+		var paramSubsegment = new System.Web.Routing.ParameterSubsegment("*paramName");		
+		list.push(paramSubsegment);
+		
+		var segment = new System.Web.Routing.ContentPathSegment(list);		
+		assert.ok(segment.isCatchAll());		
+        test.done();
+	}
 });

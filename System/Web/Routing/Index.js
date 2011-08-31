@@ -10,6 +10,7 @@ Modules.extend(require('./Route.js'));
 Modules.extend(require('./RouteCollection.js'));
 Modules.extend(require('./RouteTable.js'));
 Modules.extend(require('./Router.js'));
+Modules.extend(require('./VirtualPathData.js'));
 Modules.extend(require('./StopRoutingHandler.js'));
 
 
