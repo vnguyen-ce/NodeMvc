@@ -4,27 +4,24 @@ var Core = require('../../Core.js');
 var System = require('./RouteBase.js');	
 
 System.Web.Routing.Route = function(url){
-	this.Url = url;
+	this.url = url;
 }
 	
 System.Web.Routing.Route.Inherit(System.Web.Routing.RouteBase);
 
 // Gets or sets a dictionary of expressions that specify valid values for a URL parameter.
-System.Web.Routing.Route.prototype.Constraints = {};
+System.Web.Routing.Route.prototype.constraints = {};
 
 // Gets or sets custom values that are passed to the route handler, but which are not used to determine whether the route matches a URL pattern.
-System.Web.Routing.Route.prototype.DataTokens = {};
+System.Web.Routing.Route.prototype.dataTokens = {};
 
 // Gets or sets the values to use if the URL does not contain all the parameters.
-System.Web.Routing.Route.prototype.Defaults = {};
+System.Web.Routing.Route.prototype.defaults = {};
 
 // Gets or sets the object that processes requests for the route.
-System.Web.Routing.Route.prototype.RouteHandler = null;
+System.Web.Routing.Route.prototype.routeHandler = null;
 
-// Gets or sets the URL pattern for the route.
-System.Web.Routing.Route.prototype.Url = null;
-				
-System.Web.Routing.Route.prototype.GetRouteData = function(httpContext) {
+System.Web.Routing.Route.prototype.getRouteData = function(httpContext) {
 	console.log("implement method GetRouteData")
 };
 

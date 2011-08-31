@@ -7,7 +7,7 @@ var System = require('../../../System');
 
 System.Web.Routing.StopRoutingHandler = function() {};
 System.Web.Routing.StopRoutingHandler.Implement(System.Web.IHttpHandler);
-System.Web.Routing.StopRoutingHandler.prototype.ProcessRequest = function(httpContext) {
+System.Web.Routing.StopRoutingHandler.prototype.processRequest = function(httpContext) {
 	if (!(httpContext instanceof System.Web.HttpContext)){
 		throw new System.InvalidOperationException('object is not an instance of System.Web.HttpContext');
 	}

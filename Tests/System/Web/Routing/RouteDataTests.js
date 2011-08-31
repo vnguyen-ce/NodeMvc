@@ -10,8 +10,8 @@ module.exports = testCase({
 	can_create_RouteData_with_null_param: function (test) {		
 		var route = new System.Web.Routing.Route();		
 		var routeData = new System.Web.Routing.RouteData();
-		assert.ok(routeData.Values instanceof System.Web.Routing.RouteValueDictionary);
-		assert.ok(routeData.DataTokens instanceof System.Web.Routing.RouteValueDictionary);		
+		assert.ok(routeData.values instanceof System.Web.Routing.RouteValueDictionary);
+		assert.ok(routeData.dataTokens instanceof System.Web.Routing.RouteValueDictionary);		
         test.done();
     },
 	

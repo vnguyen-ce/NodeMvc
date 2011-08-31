@@ -12,12 +12,12 @@ module.exports = testCase({
 		var route = new System.Web.Routing.Route(url);		
 		
 		assert.ok(route instanceof System.Web.Routing.RouteBase);		
-		assert.equal(route.Url, url);
-		assert.isNotNull(route.Constraints);
-		assert.isNotNull(route.DataTokens);
-		assert.isNotNull(route.Defaults);
-		assert.isNull(route.RouteHandler);
-		assert.isNotNull(route.GetRouteData);
+		assert.equal(route.url, url);
+		assert.isNotNull(route.constraints);
+		assert.isNotNull(route.dataTokens);
+		assert.isNotNull(route.defaults);
+		assert.isNull(route.routeHandler);
+		assert.isFunction(route.getRouteData);
 		
         test.done();
     },

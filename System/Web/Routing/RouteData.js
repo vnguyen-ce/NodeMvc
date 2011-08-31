@@ -15,13 +15,13 @@ System.Web.Routing.RouteData = function(routeBase, routeHandler){
 		throw new System.InvalidOperationException("Second argument is not an instance of System.Web.Routing.IRouteHandler");
 	}
 	
-	this.Values = new System.Web.Routing.RouteValueDictionary();
-	this.DataTokens = new System.Web.Routing.RouteValueDictionary();
-	this.Route = routeBase;
-	this.RouteHandler = routeHandler;	
+	this.values = new System.Web.Routing.RouteValueDictionary();
+	this.dataTokens = new System.Web.Routing.RouteValueDictionary();
+	this.route = routeBase;
+	this.routeHandler = routeHandler;	
 }
 
-System.Web.Routing.RouteData.prototype.GetRequiredString = function(valueName) {
+System.Web.Routing.RouteData.prototype.getRequiredString = function(valueName) {
 	if (this.Values.ContainsKey(valueName)) {			
 		var str = this.Values[valueName];
 		console.log(typeof this.Values[valueName]);

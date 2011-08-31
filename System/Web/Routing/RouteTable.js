@@ -10,7 +10,7 @@ System.Web.Routing.RouteTable = {
 	//
 	// Returns:
 	//     An object that contains all the routes in the collection.
-	Routes: new System.Web.Routing.RouteCollection()
+	routes: new System.Web.Routing.RouteCollection()
 };
 
 module.exports = System;

@@ -124,7 +124,7 @@ module.exports = testCase({
 		routeCollection.InsertItem(0, {Url: '{*catchAll}', Defaults: {}});		
 		routeCollection.RemoveItem(1);		
 		assert.equal(1, routeCollection.length);
-		assert.equal('{*catchAll}', routeCollection[0].Url);
+		assert.equal('{*catchAll}', routeCollection[0].url);
 		test.done();
 	},
 	
@@ -134,7 +134,7 @@ module.exports = testCase({
 		routeCollection.InsertItem(0, {Url: '{*catchAll}', Defaults: {}});		
 		routeCollection.SetItem(1, {Url: '{*catchAllUrl}', Defaults: {}});		
 		assert.equal(2, routeCollection.length);
-		assert.equal('{*catchAllUrl}', routeCollection[1].Url);
+		assert.equal('{*catchAllUrl}', routeCollection[1].url);
 		test.done();
 	}
 });
