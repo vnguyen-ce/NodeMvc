@@ -4,6 +4,7 @@ var Core = require('../../Core.js');
 var System = require('../../../System');	
 	System.extend(require('./RouteBase.js'));
 	System.extend(require('./StopRoutingHandler.js'));
+
 System.Web.Routing.RouteCollection = Core.inheritFrom(Array);
 System.Web.Routing.RouteCollection.prototype._namedMap = new Array();	
 
@@ -24,7 +25,7 @@ System.Web.Routing.RouteCollection.prototype._namedMap = new Array();
 //
 //   System.ArgumentException:
 //     name is already used in the collection.
-System.Web.Routing.RouteCollection.prototype.AddByName = function(name /*route name*/, routeBase) {			
+System.Web.Routing.RouteCollection.prototype.addByName = function(name /*route name*/, routeBase) {			
 	if (routeBase == null || name == null || name == ''){
 		throw new System.ArgumentNullException('name');
 	}	
@@ -36,7 +37,7 @@ System.Web.Routing.RouteCollection.prototype.AddByName = function(name /*route n
 	this._namedMap[name] = route;		
 };
 
-System.Web.Routing.RouteCollection.prototype.Add = function(routeBase) {			
+System.Web.Routing.RouteCollection.prototype.add = function(routeBase) {			
 	if (routeBase == null){
 		throw new System.ArgumentNullException('routeBase');
 	}	
@@ -47,12 +48,12 @@ System.Web.Routing.RouteCollection.prototype.Add = function(routeBase) {
 var _getRoute = function(routeBase) {
 	var route = routeBase;
 	if (!(routeBase instanceof System.Web.Routing.RouteBase)){
-		if (typeof routeBase.Url === 'string' && 
-			typeof routeBase.Defaults === 'object' &&
-			routeBase.Url != '') 
+		if (typeof routeBase.url === 'string' && 
+			typeof routeBase.defaults === 'object' &&
+			routeBase.url != '') 
 		{
-			route = new System.Web.Routing.Route(routeBase.Url); 
-			route.Defaults = routeBase.Defaults;
+			route = new System.Web.Routing.Route(routeBase.url); 
+			route.defaults = routeBase.defaults;
 		}
 		else {
 			throw new System.InvalidOperationException('Provided item is not an instance of System.Web.Routing.RouteBase');
@@ -64,7 +65,7 @@ var _getRoute = function(routeBase) {
 //
 // Summary:
 //     Removes all the elements from the System.Web.Routing.RouteCollection object.
-System.Web.Routing.RouteCollection.prototype.ClearItems = function() {		
+System.Web.Routing.RouteCollection.prototype.clearItems = function() {		
 	this.splice(0, this.length);		
 	this._namedMap = [];		
 };	
@@ -76,11 +77,11 @@ System.Web.Routing.RouteCollection.prototype.ClearItems = function() {
 // Parameters:
 //   url:
 //     The URL pattern to be ignored.
-System.Web.Routing.RouteCollection.prototype.Ignore = function(urlPattern){
+System.Web.Routing.RouteCollection.prototype.ignore = function(urlPattern){
 	var ignoreRoute = new System.Web.Routing.Route(urlPattern);
 	
 	// TODO: Should implement a FileSystemHandler instead of using StopRoutingHandler
-	ignoreRoute.RouteHandler = new System.Web.Routing.StopRoutingHandler();
+	ignoreRoute.routeHandler = new System.Web.Routing.StopRoutingHandler();
 	this.push(ignoreRoute);
 };
 
@@ -102,7 +103,7 @@ System.Web.Routing.RouteCollection.prototype.Ignore = function(urlPattern){
 //
 //   System.ArgumentException:
 //     item is already in the collection.
-System.Web.Routing.RouteCollection.prototype.InsertItem = function(index, routeBase){
+System.Web.Routing.RouteCollection.prototype.insertItem = function(index, routeBase){
 	if (routeBase == null){
 		throw new System.ArgumentNullException('routeBase');
 	}	
@@ -118,7 +119,7 @@ System.Web.Routing.RouteCollection.prototype.InsertItem = function(index, routeB
 // Parameters:
 //   index:
 //     The zero-based index of the route to remove.
-System.Web.Routing.RouteCollection.prototype.RemoveItem = function(index){
+System.Web.Routing.RouteCollection.prototype.removeItem = function(index){
 	this.splice(index, 1);
 };	
 
@@ -139,7 +140,7 @@ System.Web.Routing.RouteCollection.prototype.RemoveItem = function(index){
 //
 //   System.ArgumentException:
 //     item is already in the collection.
-System.Web.Routing.RouteCollection.prototype.SetItem = function(index, routeBase){			
+System.Web.Routing.RouteCollection.prototype.setItem = function(index, routeBase){			
 	if (routeBase == null){
 		throw new System.ArgumentNullException('routeBase');
 	}	

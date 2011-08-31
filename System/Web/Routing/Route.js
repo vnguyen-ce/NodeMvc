@@ -22,7 +22,7 @@ System.Web.Routing.Route.prototype.defaults = {};
 System.Web.Routing.Route.prototype.routeHandler = null;
 
 System.Web.Routing.Route.prototype.getRouteData = function(httpContext) {
-	console.log("implement method GetRouteData")
+	console.log("implement method getRouteData")
 };
 
 module.exports = System;

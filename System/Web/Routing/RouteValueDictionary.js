@@ -23,40 +23,40 @@ System.Web.Routing.RouteValueDictionary = function(object){
 	}
 };
 
-System.Web.Routing.RouteValueDictionary.prototype.Add = function(key, value) {
+System.Web.Routing.RouteValueDictionary.prototype.add = function(key, value) {
 	this[key] = value;
 };
 
-System.Web.Routing.RouteValueDictionary.prototype.AddValues = function(values) {
+System.Web.Routing.RouteValueDictionary.prototype.addValues = function(values) {
 	if (values == null || typeof values !== 'object') {
 		throw new System.ArgumentNullException('values');
 	}
 	_copyObjects(values, this);
 };
 
-System.Web.Routing.RouteValueDictionary.prototype.Clear = function() {
+System.Web.Routing.RouteValueDictionary.prototype.clear = function() {
 	for (key in this) {
 		delete this[key];
 	}
 };
  
-System.Web.Routing.RouteValueDictionary.prototype.ContainsKey = function(key) {
+System.Web.Routing.RouteValueDictionary.prototype.containsKey = function(key) {
 	return (typeof this[key] != 'undefined');
 };
 
-System.Web.Routing.RouteValueDictionary.prototype.ContainsValue = function(value) {
+System.Web.Routing.RouteValueDictionary.prototype.containsValue = function(value) {
 	for (key in this) {
 		if (this[key] === value) return true;
 	}
 	return false;
 };
 
-System.Web.Routing.RouteValueDictionary.prototype.Remove = function(key) {
+System.Web.Routing.RouteValueDictionary.prototype.remove = function(key) {
 	delete this[key];
 };
 
 
-System.Web.Routing.RouteValueDictionary.prototype.Count = function() {
+System.Web.Routing.RouteValueDictionary.prototype.count = function() {
 	var count = 0;
 	for (key in this) {
 		if (typeof this[key] != 'function') count++;
@@ -64,25 +64,20 @@ System.Web.Routing.RouteValueDictionary.prototype.Count = function() {
 	return count;
 };
 
-System.Web.Routing.RouteValueDictionary.prototype.Keys = function() {
-	var keys = new Array();
+System.Web.Routing.RouteValueDictionary.prototype.keys = function() {
+	var allKeys = new Array();
 	for (key in this) {
-		if (typeof this[key] != 'function') keys.push(key);
+		if (typeof this[key] != 'function') allKeys.push(key);
 	}
-	return keys;
+	return allKeys;
 };
 
-System.Web.Routing.RouteValueDictionary.prototype.Values = function() {
+System.Web.Routing.RouteValueDictionary.prototype.values = function() {
 	var vals = new Array();
 	for (key in this) {
 		if (typeof this[key] != 'function') vals.push(this[key]);
 	}
 	return vals;
 };
-
-
-
-
-
 
 module.exports = System;

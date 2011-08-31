@@ -14,19 +14,19 @@ module.exports = testCase({
         test.done();
     },
 	
-	Add_should_add_the_value_by_the_provided_key: function(test) {
+	add_should_add_the_value_by_the_provided_key: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
-		dic.Add('action', 'ActionName');
+		dic.add('action', 'ActionName');
 		assert.equal('ActionName', dic.action);
 		assert.equal('ActionName', dic['action']);
 		test.done();
 	},
 	
-	AddValues_should_throw_exception_if_provide_null_parameter: function(test) {
+	addValues_should_throw_exception_if_provide_null_parameter: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
 		assert.throws(
 			function() {
-				dic.AddValues(null);
+				dic.addValues(null);
 			}, 
 			System.ArgumentNullException,
 			'Should throw ArgumentNullException when providing null parameter'
@@ -34,7 +34,7 @@ module.exports = testCase({
 		
 		assert.throws(
 			function() {
-				dic.AddValues(System.Web.Routing.RouteValueDictionary);
+				dic.addValues(System.Web.Routing.RouteValueDictionary);
 			}, 
 			System.ArgumentNullException,
 			'Should throw ArgumentNullException when providing null parameter'
@@ -42,20 +42,20 @@ module.exports = testCase({
 		test.done();
 	},
 	
-	AddValues_should_merge_content: function(test) {
+	addValues_should_merge_content: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
-		dic.Add('action', 'ActionName');
-		dic.AddValues({controller: 'ControllerName', action: 'NewActionName'});
+		dic.add('action', 'ActionName');
+		dic.addValues({controller: 'ControllerName', action: 'NewActionName'});
 		assert.equal('NewActionName', dic.action);
 		assert.equal('NewActionName', dic['action']);
 		test.done();
 	},
 	
-	Clear_should_remove_everything: function(test) {
+	clear_should_remove_everything: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
-		dic.Add('action', 'ActionName');
-		dic.AddValues({controller: 'ControllerName', action: 'NewActionName'});
-		dic.Clear();
+		dic.add('action', 'ActionName');
+		dic.addValues({controller: 'ControllerName', action: 'NewActionName'});
+		dic.clear();
 		assert.ok(dic.action == undefined);
 		assert.ok(dic['action'] == undefined);
 		assert.ok(dic.controller == undefined);
@@ -63,62 +63,62 @@ module.exports = testCase({
 		test.done();
 	},
 	
-	ContainsKey_should_return_true_if_object_contains_the_key: function(test) {
+	containsKey_should_return_true_if_object_contains_the_key: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
-		dic.Add('action', 'ActionName');
-		dic.AddValues({controller: 'ControllerName', action: 'NewActionName'});
-		assert.ok(dic.ContainsKey('controller'));
-		assert.ok(dic.ContainsKey('action'));
-		assert.ok(!dic.ContainsKey('id'));
+		dic.add('action', 'ActionName');
+		dic.addValues({controller: 'ControllerName', action: 'NewActionName'});
+		assert.ok(dic.containsKey('controller'));
+		assert.ok(dic.containsKey('action'));
+		assert.ok(!dic.containsKey('id'));
 		test.done();		
 	},
 	
-	ContainsValue_should_return_true_if_object_contains_the_value: function(test) {
+	containsValue_should_return_true_if_object_contains_the_value: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
-		dic.Add('action', 'ActionName');
-		dic.AddValues({controller: 'ControllerName', action: 'NewActionName'});
-		assert.ok(dic.ContainsValue('ControllerName'));
-		assert.ok(dic.ContainsValue('NewActionName'));
-		assert.ok(!dic.ContainsValue('id'));
+		dic.add('action', 'ActionName');
+		dic.addValues({controller: 'ControllerName', action: 'NewActionName'});
+		assert.ok(dic.containsValue('ControllerName'));
+		assert.ok(dic.containsValue('NewActionName'));
+		assert.ok(!dic.containsValue('id'));
 		test.done();		
 	},
 	
-	Remove_should_remove_the_item_by_key: function(test) {
+	remove_should_remove_the_item_by_key: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
-		dic.Add('action', 'ActionName');
-		dic.AddValues({controller: 'ControllerName', action: 'NewActionName'});
-		dic.Remove('action');
-		assert.ok(dic.ContainsValue('ControllerName'));
-		assert.ok(!dic.ContainsValue('NewActionName'));
-		assert.ok(!dic.ContainsValue('id'));
+		dic.add('action', 'ActionName');
+		dic.addValues({controller: 'ControllerName', action: 'NewActionName'});
+		dic.remove('action');
+		assert.ok(dic.containsValue('ControllerName'));
+		assert.ok(!dic.containsValue('NewActionName'));
+		assert.ok(!dic.containsValue('id'));
 		test.done();		
 	},
 	
-	Count_should_return_count_of_the_items: function(test) {
+	count_should_return_count_of_the_items: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
-		dic.Add('action', 'ActionName');
-		dic.AddValues({controller: 'ControllerName', action: 'NewActionName'});
-		assert.equal(2, dic.Count());
+		dic.add('action', 'ActionName');
+		dic.addValues({controller: 'ControllerName', action: 'NewActionName'});
+		assert.equal(2, dic.count());
 		test.done();		
 	},
 	
-	Keys_should_return_all_of_keys: function(test) {
+	keys_should_return_all_of_keys: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
-		dic.Add('action', 'ActionName');
-		dic.AddValues({controller: 'ControllerName', action: 'NewActionName'});
-		assert.equal(2, dic.Keys().length);
-		assert.equal('controller', dic.Keys()[0]);
-		assert.equal('action', dic.Keys()[1]);
+		dic.add('action', 'ActionName');
+		dic.addValues({controller: 'ControllerName', action: 'NewActionName'});
+		assert.equal(2, dic.keys().length);
+		assert.equal('controller', dic.keys()[0]);
+		assert.equal('action', dic.keys()[1]);
 		test.done();		
 	},
 	
-	Values_should_return_all_of_keys: function(test) {
+	values_should_return_all_of_keys: function(test) {
 		var dic = new System.Web.Routing.RouteValueDictionary({controller: 'ControllerName'});
-		dic.Add('action', 'ActionName');
-		dic.AddValues({controller: 'ControllerName', action: 'NewActionName'});
-		assert.equal(2, dic.Values().length);
-		assert.equal('ControllerName', dic.Values()[0]);
-		assert.equal('NewActionName', dic.Values()[1]);
+		dic.add('action', 'ActionName');
+		dic.addValues({controller: 'ControllerName', action: 'NewActionName'});
+		assert.equal(2, dic.values().length);
+		assert.equal('ControllerName', dic.values()[0]);
+		assert.equal('NewActionName', dic.values()[1]);
 		test.done();		
 	}
 });
