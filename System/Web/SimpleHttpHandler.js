@@ -6,14 +6,14 @@ var System = require('./Routing');
 	
 System.Web.SimpleHttpHandler = function() {	
 };
-System.Web.SimpleHttpHandler.Implement(System.Web.IHttpHandler);
+System.Web.SimpleHttpHandler.implement(System.Web.IHttpHandler);
 System.Web.SimpleHttpHandler.prototype.ProcessRequest = function(httpContext) {
 	if (!(httpContext instanceof System.Web.HttpContext)){
 		throw 'object is not an instance of System.Web.HttpContext';
 	}
 	
-	httpContext.HttpResponse.writeHead(200, {'Content-Type': 'text/plain'});
-	httpContext.HttpResponse.end('SimpleHttpHandler\nIt is: ' + new Date());
+	httpContext.httpResponse.writeHead(200, {'Content-Type': 'text/plain'});
+	httpContext.httpResponse.end('SimpleHttpHandler\nIt is: ' + new Date());
 };
 
 module.exports = System;

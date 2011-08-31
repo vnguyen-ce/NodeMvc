@@ -7,7 +7,7 @@ System.Web.Routing.Route = function(url){
 	this.url = url;
 }
 	
-System.Web.Routing.Route.Inherit(System.Web.Routing.RouteBase);
+System.Web.Routing.Route.inherit(System.Web.Routing.RouteBase);
 
 // Gets or sets a dictionary of expressions that specify valid values for a URL parameter.
 System.Web.Routing.Route.prototype.constraints = {};

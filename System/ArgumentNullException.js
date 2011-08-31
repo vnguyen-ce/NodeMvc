@@ -5,6 +5,6 @@ System.ArgumentNullException = function(argumentName) {
 	this.message = argumentName + ' can not be null';	
 };
 	
-System.ArgumentNullException.Inherit(System.Exception);
+System.ArgumentNullException.inherit(System.Exception);
 
 module.exports = System;

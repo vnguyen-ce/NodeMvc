@@ -27,7 +27,7 @@ Object.defineProperty(Object.prototype, "extend", {
     }
 });
 
-Object.defineProperty(Object.prototype, "Inherit", {
+Object.defineProperty(Object.prototype, "inherit", {
     enumerable: false,
     value: function(from) {
         if (typeof (from) != 'function') {
@@ -41,7 +41,7 @@ Object.defineProperty(Object.prototype, "Inherit", {
     }
 });
 
-Object.defineProperty(Object.prototype, "Implement", {
+Object.defineProperty(Object.prototype, "implement", {
     enumerable: false,
     value: function(anInterface) {    
         if (typeof (anInterface) != 'function') {
@@ -70,7 +70,7 @@ function inheritFrom(type) {
         type.call(this, param1, param2, param3);
     };    
      
-    theClass.Inherit(type);
+    theClass.inherit(type);
     return theClass;
 }
 
