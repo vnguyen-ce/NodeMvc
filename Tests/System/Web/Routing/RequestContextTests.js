@@ -53,8 +53,8 @@ module.exports = testCase({
 	
 	can_initialize_RequestContext_by_providing_HttpContext_and_RouteData: function (test) {						
 		var requestContext = new System.Web.Routing.RequestContext(new System.Web.HttpContext(), new System.Web.Routing.RouteData());		
-		test.ok(requestContext.HttpContext instanceof System.Web.HttpContext);
-		test.ok(requestContext.RouteData instanceof System.Web.Routing.RouteData);		
+		test.ok(requestContext.httpContext instanceof System.Web.HttpContext);
+		test.ok(requestContext.routeData instanceof System.Web.Routing.RouteData);		
         test.done();
     }
 });

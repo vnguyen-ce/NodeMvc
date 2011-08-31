@@ -19,8 +19,8 @@ module.exports = testCase({
 	
 	when_initialise_a_HttpContext_with_request_and_response_those_value_should_have_value: function (test) {
 		var exception = new System.Web.HttpContext({}, {});
-        test.ok(exception.HttpResponse != null);
-		test.ok(exception.HttpRequest != null);		
+        test.ok(exception.httpResponse != null);
+		test.ok(exception.httpRequest != null);		
         test.done();
     }
 });

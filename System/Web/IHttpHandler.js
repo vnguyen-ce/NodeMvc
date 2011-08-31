@@ -1,11 +1,11 @@
 var Core = require('../Core.js');
-var System = System || {};
+var System = require('../NotImplementedException.js');
 	System.Web = System.Web || {};
 	
 System.Web.IHttpHandler = Core.interface('IHttpHandler', {
 	IsReusable : false,	
 	ProcessRequest : function(httpContext){
-		throw 'Not implemented exception';
+		throw new System.NotImplementedException();
 	}	
 });
 

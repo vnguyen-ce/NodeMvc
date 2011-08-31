@@ -12,8 +12,8 @@ System.Web.Routing.RequestContext = function(httpContext, routeData){
 		throw new System.ArgumentNullException("routeData");
 	}
 	
-	this.HttpContext = httpContext;
-	this.RouteData = routeData;	
+	this.httpContext = httpContext;
+	this.routeData = routeData;	
 };
 
 module.exports = System;
