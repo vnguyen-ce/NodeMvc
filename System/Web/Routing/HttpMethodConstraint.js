@@ -1,10 +1,11 @@
 require('../../Core.js');
 
 var System = require('../../../System');
-	System.extend(require('./../HttpContext.js'));
+	System.extend(require('../../../System/Web/HttpContext.js'));
 	System.extend(require('./IRouteConstraint.js'));
 	System.extend(require('./Route.js'));
 	System.extend(require('./RouteValueDictionary.js'));		
+	System.extend(require('./RouteDirection.js'));		
 
 System.Web.Routing.HttpMethodConstraint = function(/* string[] */allowedMethods) {
 	if (!(allowedMethods instanceof Array)){
@@ -21,11 +22,11 @@ System.Web.Routing.HttpMethodConstraint.prototype.match = /* bool */ function(/*
 																			  /*string*/ parameterName, 
 																			  /*RouteValueDictionary*/ routeValueDictionary, 
 																			  /*RouteDirection*/ routeDirection) {				
-	if (!(httpcontext instanceof System.Web.HttpContext)){
+	if (httpContext == null || !(httpContext instanceof System.Web.HttpContext)){
 		throw new System.ArgumentNullException('httpContext');
 	}
 	
-	if (!(route instanceof System.Web.Routing.Route)){
+	if (route == null || !(route instanceof System.Web.Routing.Route)){
 		throw new System.ArgumentNullException('route');
 	}
 	
@@ -33,13 +34,33 @@ System.Web.Routing.HttpMethodConstraint.prototype.match = /* bool */ function(/*
 		throw new System.ArgumentNullException('parameterName');
 	}
 	
-	if (!(route instanceof System.Web.Routing.RouteValueDictionary)){
+	if (routeValueDictionary == null || !(routeValueDictionary instanceof System.Web.Routing.RouteValueDictionary)){
 		throw new System.ArgumentNullException('routeValueDictionary');
 	}
 	
-	
-	
-	
+	var parameterValueString;
+	switch(routeDirection)
+	{
+		case System.Web.Routing.RouteDirection.incomingRequest:
+			var predicate = function(method) {
+				return method.toLowerCase() === httpContext.httpRequest.httpMethod.toLowerCase();
+			};
+			return this.allowedMethods.any(predicate);
+			
+		case System.Web.Routing.RouteDirection.urlGeneration:
+			
+			if (routeValueDictionary.containsKey(parameterName)) {				
+				var parameterValueString = routeValueDictionary[parameterName];				
+				if (typeof parameterValueString != 'string') {
+					throw new System.InvalidOperationException('Parameter value must be string');
+				}
+				return this.allowedMethods.any(function(method){
+					return method.toLowerCase() === parameterValueString.toLowerCase(); 
+				});
+			}	
+			return true;
+	}
+	return true;	
 };
 
 module.exports = System;
