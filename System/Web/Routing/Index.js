@@ -15,6 +15,6 @@ Modules.extend(require('./Router.js'));
 Modules.extend(require('./VirtualPathData.js'));
 Modules.extend(require('./StopRoutingHandler.js'));
 Modules.extend(require('./HttpMethodConstraint.js'));
-
+Modules.extend(require('./RouteParser.js'));
 
 module.exports = Modules;
