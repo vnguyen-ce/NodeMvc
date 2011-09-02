@@ -51,5 +51,44 @@ module.exports = testCase({
 		assert.equal(false, System.Web.Routing.RouteParser._isSeparator('//'));		
 		assert.equal(false, System.Web.Routing.RouteParser._isSeparator('a'));		
 		test.done();
+	},
+	
+	
+	_isValidParameterName_should_return_false_if_string_is_empty_or_contains_special_characters: function(test){
+		assert.equal(false, System.Web.Routing.RouteParser._isValidParameterName(''));		
+		assert.equal(false, System.Web.Routing.RouteParser._isValidParameterName('/'));		
+		assert.equal(false, System.Web.Routing.RouteParser._isValidParameterName('{'));		
+		assert.equal(false, System.Web.Routing.RouteParser._isValidParameterName('}'));		
+		assert.equal(true, System.Web.Routing.RouteParser._isValidParameterName('abc.-'));		
+		test.done();
+	},
+	
+	_parseUrlSegment_should_return_a_list_of_PathSubsegment: function(test) {
+		var url = 'User/{action}/{id}';	
+		var result = System.Web.Routing.RouteParser._parseUrlSegment(url);
+		assert.equal(4, result.length);
+		assert.ok(result[0] instanceof System.Web.Routing.LiteralSubsegment);
+		assert.ok(result[1] instanceof System.Web.Routing.ParameterSubsegment);
+		assert.ok(result[2] instanceof System.Web.Routing.LiteralSubsegment);
+		assert.ok(result[3] instanceof System.Web.Routing.ParameterSubsegment);
+		
+		assert.equal('User/', result[0].literal);
+		assert.equal('action', result[1].parameterName);
+		assert.equal('/', result[2].literal);
+		assert.equal('id', result[3].parameterName);	
+		
+		test.done();
+	},
+	
+	_splitUrlToPathSegments_should_return_a_list_of_PathSegment: function(test) {
+		var urlParts = ['/', '{User/{action}/{id}', '/', '?sort=true'];
+		var result = System.Web.Routing.RouteParser._splitUrlToPathSegments(urlParts);
+		//console.log(result);
+		assert.equal(4, result.length);
+		assert.ok(result[0] instanceof System.Web.Routing.SeparatorPathSegment);
+		assert.ok(result[1] instanceof System.Web.Routing.ContentPathSegment);
+		assert.ok(result[2] instanceof System.Web.Routing.SeparatorPathSegment);
+		assert.ok(result[3] instanceof System.Web.Routing.ContentPathSegment);
+		test.done();
 	}
 });
