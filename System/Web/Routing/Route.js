@@ -3,9 +3,11 @@ var Core = require('../../Core.js');
 // Import 1 type of same namespace and add more class to that namespace
 var System = require('./RouteBase.js');	
 
-System.Web.Routing.Route = function(url){
+function Route(url){
 	this.url = url;
-}
+};
+
+System.Web.Routing.Route = Route;
 	
 System.Web.Routing.Route.inherit(System.Web.Routing.RouteBase);
 

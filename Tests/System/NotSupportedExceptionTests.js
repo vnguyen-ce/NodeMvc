@@ -19,7 +19,7 @@ module.exports = testCase({
         test.done();
     },
 	
-		can_get_type: function (test) {		
+	can_get_type: function (test) {		
 		var message = 'Not supported';
 		var exception = new System.NotSupportedException(message);        
 		var type = exception.getType();

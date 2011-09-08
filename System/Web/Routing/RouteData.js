@@ -6,7 +6,7 @@ var System = require('../../InvalidOperationException.js');
 	System.extend(require('./RouteBase.js'));
 	System.extend(require('./IRouteHandler.js'));
 
-System.Web.Routing.RouteData = function(routeBase, routeHandler){
+function RouteData(routeBase, routeHandler){
 	
 	if (routeBase != null && !(routeBase instanceof System.Web.Routing.RouteBase)) {
 		throw new System.InvalidOperationException("First argument is not an instance of System.Web.Routing.RouteBase");
@@ -19,7 +19,9 @@ System.Web.Routing.RouteData = function(routeBase, routeHandler){
 	this.dataTokens = new System.Web.Routing.RouteValueDictionary();
 	this.route = routeBase;
 	this.routeHandler = routeHandler;	
-}
+};
+
+System.Web.Routing.RouteData = RouteData;
 
 System.Web.Routing.RouteData.prototype.getRequiredString = function(valueName) {
 	if (this.Values.ContainsKey(valueName)) {			
@@ -30,6 +32,10 @@ System.Web.Routing.RouteData.prototype.getRequiredString = function(valueName) {
 		}
 	}
 	throw new System.InvalidOperationException('valueName is required');
-}
+};
+
+System.Web.Routing.RouteData.prototype.getType = function() {
+	return new System.Type(/*base type*/null, 'RouteData', 'System.Web.Routing.RouteData');
+};
 
 module.exports = System;

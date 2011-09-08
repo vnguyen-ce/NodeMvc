@@ -17,10 +17,16 @@ function _copyObjects(source, des){
 	});
 }
 	
-System.Web.Routing.RouteValueDictionary = function(object){
+function RouteValueDictionary(object){
 	if (object != null) {
 		_copyObjects(object, this);
 	}
+};
+
+System.Web.Routing.RouteValueDictionary = RouteValueDictionary;
+
+System.Web.Routing.RouteValueDictionary.prototype.getType = function() {
+	return new System.Type(/*base type*/null, 'RouteValueDictionary', 'System.Web.Routing.RouteValueDictionary');
 };
 
 System.Web.Routing.RouteValueDictionary.prototype.add = function(key, value) {

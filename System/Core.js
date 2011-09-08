@@ -42,7 +42,7 @@ Object.defineProperty(Object.prototype, "inherit", {
 		if (from.prototype.getType != undefined) {
 			var baseType = from.prototype.getType();
 			
-			var namespace = baseType.namespace.substring(0, baseType.namespace.indexOf('.'));		
+			var namespace = baseType.namespace.substring(0, baseType.namespace.lastIndexOf('.'));		
 			var name = this.name;			
 			this.prototype.getType = function() {
 				return {
@@ -78,7 +78,7 @@ Object.defineProperty(Object.prototype, "implement", {
 			if (baseType.namespace == undefined){
 				baseType.namespace = '';
 			}
-			var namespace = baseType.namespace.substring(0, baseType.namespace.indexOf('.'));		
+			var namespace = baseType.namespace.substring(0, baseType.namespace.lastIndexOf('.'));		
 			var name = this.name;			
 			this.prototype.getType = function() {
 				return {
@@ -119,7 +119,7 @@ function inheritFrom(type, newTypename, newNamespace) {
     return theClass;
 }
 
-function interface(name, contract, namespace /*rearrange the parameter after next commit*/){
+function interface(contract, name, namespace){
     var _interface = function() {
         if (this._isImplementing !== true){
             throw new Error('Cannot initialize interface "' + name + '"');
@@ -127,6 +127,10 @@ function interface(name, contract, namespace /*rearrange the parameter after nex
          
         if (name === '' || typeof name !== 'string'){
             throw new Error('Must provide interface name');
+        }
+		
+		if (namespace === '' || typeof namespace !== 'string'){
+            throw new Error('Must provide interface namespace');
         }
          
         if (contract == null || typeof contract !== 'object') {

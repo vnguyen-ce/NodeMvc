@@ -5,7 +5,7 @@ var System = require('../../InvalidOperationException.js');
 	System.extend(require('./RouteValueDictionary.js'));
 	System.extend(require('./RouteBase.js'));	
 
-System.Web.Routing.VirtualPathData = function(routeBase, virtualPath){	
+function VirtualPathData(routeBase, virtualPath){	
 	if (routeBase != null && !(routeBase instanceof System.Web.Routing.RouteBase)) {
 		throw new System.InvalidOperationException("First argument is not an instance of System.Web.Routing.RouteBase");
 	}
@@ -16,6 +16,13 @@ System.Web.Routing.VirtualPathData = function(routeBase, virtualPath){
 	this.route = routeBase;
 	this.virtualPath = virtualPath != null ? virtualPath : '';
 	this.dataTokens = new System.Web.Routing.RouteValueDictionary();	
-}
+};
+
+System.Web.Routing.VirtualPathData = VirtualPathData;
+
+
+System.Web.Routing.VirtualPathData.prototype.getType = function() {
+	return new System.Type(/*base type*/null, 'VirtualPathData', 'System.Web.Routing.VirtualPathData');
+};
 
 module.exports = System;

@@ -1,10 +1,9 @@
 // Import 1 type of same namespace and add more class to that namespace
 var System = require('../../ArgumentNullException.js');
 	System.extend(require('../HttpContext.js'));
-	System.extend(require('./RouteData.js'));
-	
+	System.extend(require('./RouteData.js'));	
 
-System.Web.Routing.RequestContext = function(httpContext, routeData){
+function RequestContext(httpContext, routeData){
 	if (httpContext == null || !(httpContext instanceof System.Web.HttpContext)) {
 		throw new System.ArgumentNullException("httpContext");
 	}
@@ -14,6 +13,12 @@ System.Web.Routing.RequestContext = function(httpContext, routeData){
 	
 	this.httpContext = httpContext;
 	this.routeData = routeData;	
+};
+System.Web.Routing.RequestContext = RequestContext;
+
+
+System.Web.Routing.RequestContext.prototype.getType = function() {
+	return new System.Type(/*base type*/null, 'RequestContext', 'System.Web.Routing.RequestContext');
 };
 
 module.exports = System;
