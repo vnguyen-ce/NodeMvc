@@ -7,6 +7,6 @@ System.Web.IHttpHandler = Core.interface('IHttpHandler', {
 	processRequest : function(httpContext){
 		throw new System.NotImplementedException();
 	}	
-});
+}, 'System.Web.IHttpHandler');
 
 module.exports = System;

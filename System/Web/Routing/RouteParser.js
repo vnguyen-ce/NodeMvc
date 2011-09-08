@@ -1,4 +1,4 @@
-require('../../String.js');
+var string = require('../../String.js');
 var Core = require('../../Core.js');
 
 // Import 1 type of same namespace and add more class to that namespace
@@ -111,6 +111,103 @@ System.Web.Routing.RouteParser = {
 			}				
 		}
 		return list;
+	},
+	
+	_splitUrlToPathSegmentStrings:/*IList<string>*/ function(/*string*/url){
+		var list = new Array();
+		if (!string.isNullOrEmpty(url)){
+			var index = 0;
+			for(var i = 0; i < url.length; i = index + 1) {
+				index = url.indexOf('/', i);
+				if (index == -1){
+					var str = url.substr(i);
+					if (str.length > 0){
+						list.push(str);
+					}
+					return list;
+				}
+				var item = url.substr(i, index - i);
+				if (item.length > 0){
+					list.push(item);
+				}
+				list.push('/');
+			}
+		}
+		return list;
+	},
+	
+	_validateUrlParts: function(/*List of string*/ pathSegments) {		
+		var usedParameterNames = new Array();
+		var nullable = null;
+		var flag = false;
+		for(var i = 0; i < pathSegments.length; i++){
+			var str = pathSegments[i];
+			var flag2 = false;
+			if (flag){
+				throw new System.ArgumentException("Route catch all must be last");
+			}
+			
+			if (nullable == null){
+				nullable = this._isSeparator(str);
+				flag2 = nullable;
+			}
+			else {
+				flag2 = this._isSeparator(str);
+				if (flag2 === true && nullable === true){
+					throw new System.ArgumentException("Route cannot have consecutive separators");
+				}				
+				nullable = flag2;
+			}
+			
+			if (flag2 === false){
+				var pathSubsegments = this._parseUrlSegment(str);
+				this._validateUrlSegment(pathSubsegments, usedParameterNames, str);
+				flag = pathSubsegments.any(function(x){
+					return x instanceof System.Web.Routing.ParameterSubsegment && x.IsCatchAll == true;
+				});
+			}			
+		}
+		return null;
+	},
+	
+	// Implement the last function then write unit tests for both
+	_validateUrlSegment: function(/*IList<PathSubsegment>*/ pathSubsegments, /*HashSet<string>*/ usedParameterNames, /*string*/ pathSegment)	{
+		// bool flag = false;
+		// Type type = null;
+		// foreach (PathSubsegment subsegment in pathSubsegments)
+		// {
+			// if ((type != null) && (type == subsegment.GetType()))
+			// {
+				// return new ArgumentException(string.Format(CultureInfo.CurrentUICulture, System.Web.SR.GetString("Route_CannotHaveConsecutiveParameters"), new object[0]), "routeUrl");
+			// }
+			// type = subsegment.GetType();
+			// if (!(subsegment is LiteralSubsegment))
+			// {
+				// ParameterSubsegment subsegment3 = subsegment as ParameterSubsegment;
+				// if (subsegment3 != null)
+				// {
+					// string parameterName = subsegment3.ParameterName;
+					// if (subsegment3.IsCatchAll)
+					// {
+						// flag = true;
+					// }
+					// if (!IsValidParameterName(parameterName))
+					// {
+						// return new ArgumentException(string.Format(CultureInfo.CurrentUICulture, System.Web.SR.GetString("Route_InvalidParameterName"), new object[] { parameterName }), "routeUrl");
+					// }
+					// if (usedParameterNames.Contains(parameterName))
+					// {
+						// return new ArgumentException(string.Format(CultureInfo.CurrentUICulture, System.Web.SR.GetString("Route_RepeatedParameter"), new object[] { parameterName }), "routeUrl");
+					// }
+					// usedParameterNames.Add(parameterName);
+				// }
+			// }
+		// }
+		// if (flag && (pathSubsegments.Count != 1))
+		// {
+			// return new ArgumentException(string.Format(CultureInfo.CurrentUICulture, System.Web.SR.GetString("Route_CannotHaveCatchAllInMultiSegment"), new object[0]), "routeUrl");
+		// }
+		// return null;
 	}
 };	
 

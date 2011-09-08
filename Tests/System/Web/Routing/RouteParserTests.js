@@ -90,5 +90,18 @@ module.exports = testCase({
 		assert.ok(result[2] instanceof System.Web.Routing.SeparatorPathSegment);
 		assert.ok(result[3] instanceof System.Web.Routing.ContentPathSegment);
 		test.done();
+	},
+	
+	_splitUrlToPathSegmentStrings_should_return_a_list_of_string: function(test) {
+		var url = '/{controller}/{action}/{id}';
+		var result = System.Web.Routing.RouteParser._splitUrlToPathSegmentStrings(url);
+		assert.equal(6, result.length);
+		assert.equal('/', result[0]);
+		assert.equal('{controller}', result[1]);
+		assert.equal('/', result[2]);
+		assert.equal('{action}', result[3]);
+		assert.equal('/', result[4]);
+		assert.equal('{id}', result[5]);
+		test.done();
 	}
 });

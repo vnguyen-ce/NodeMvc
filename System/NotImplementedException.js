@@ -1,6 +1,6 @@
 var Core = require('./Core.js');
 var System = require('./Exception.js');	
 	
-System.NotImplementedExcepton = Core.inheritFrom(System.Exception);
+System.NotImplementedException = Core.inheritFrom(System.Exception, 'NotImplementedException', 'System.NotImplementedException');
 
 module.exports = System;

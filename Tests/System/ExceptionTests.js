@@ -24,5 +24,15 @@ module.exports = testCase({
 		test.equal(exception.message, message);
 		test.ok(exception.stackTrace != '');
         test.done();
+    },
+	
+	can_get_type: function (test) {
+		var message = 'Some error message';
+		var exception = new System.Exception(message);        
+		var type = exception.getType();
+		test.equal('Exception', type.name);
+		test.equal('System.Exception', type.namespace);		
+		test.equal(null, type.baseType);		
+        test.done();
     }
 });
